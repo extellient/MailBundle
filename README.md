@@ -1,8 +1,7 @@
 # MailBundle
-[![Build Status](https://travis-ci.org/extellient/MailBundle.svg?branch=master)](https://travis-ci.org/extellient/mail-bundle)
-[![codecov](https://codecov.io/gh/GayKevin/test-bundle/branch/master/graph/badge.svg)](https://codecov.io/gh/GayKevin/test-bundle)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dd8a573f5ed2487a9773215803f1d991)](https://www.codacy.com/app/GayKevin/test-bundle?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GayKevin/test-bundle&amp;utm_campaign=Badge_Grade)
-
+[![Build Status](https://travis-ci.org/extellient/MailBundle.svg?branch=master)](https://travis-ci.org/extellient/MailBundle)
+[![codecov](https://codecov.io/gh/extellient/MailBundle/branch/master/graph/badge.svg)](https://codecov.io/gh/extellient/MailBundle)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cb88ab4f71de40af8994e5d98ac61f44)](https://www.codacy.com/app/xtladmin/MailBundle?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=extellient/MailBundle&amp;utm_campaign=Badge_Grade)
 
 Installation
 ------------
