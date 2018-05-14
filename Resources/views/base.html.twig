@@ -1,0 +1,77 @@
+{#
+  1. For best results we use XHTML Transitional.
+     More info:
+     - http://www.campaignmonitor.com/blog/post/3317/correct-doctype-to-use-in-html-email/
+     - http://www.emailonacid.com/blog/details/C18/doctype_-_the_black_sheep_of_html_email_design
+     - https://litmus.com/community/discussions/39-explanation-of-doctype-html-attributes-meta-tags-in-email
+  2. DPI images scaling issue in Outlook - Fix.
+     More info: https://blog.jmwhite.co.uk/2014/03/28/solving-dpi-scaling-issues-with-html-email-in-outlook/
+  3. We have included meta ‘Content Type’ so that we can set the character set as
+     UTF8 – specifying as much as possible can be a good thing when writing code
+     for the whole range of email clients.
+     More info: https://www.emailonacid.com/blog/article/email-development/the_importance_of_content-type_character_encoding_in_html_emails/
+  4. The IE=Edge meta tag enables CSS3 and media queries in Windows Phone 7.5 and
+     higher. That's why you should use it in your email.
+     More info: https://www.campaignmonitor.com/forums/topic/7989/windows-phone-8-has-full-css3media-query-support/
+  5. Meta ‘Viewport’ as seen above sets the viewable area to the width of the
+     device screen – this is essential if you want your email to be responsive.
+     If your email is intended solely for desktop users then don’t include this
+     line of code.
+  6. Outlook line heights fix.
+  7. Outlook system fonts stack fallback.
+  8. DPI images scaling issue in Outlook - Fix.
+     More info: https://blog.jmwhite.co.uk/2014/03/28/solving-dpi-scaling-issues-with-html-email-in-outlook/
+#}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">{# 1 #}
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml"> {# 2 #}
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">{# 3 #}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />{# 4 #}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />{# 5 #}
+
+    {# 6 #}
+    <!--[if gte mso 15]>
+    <style type="text/css">
+        table {
+            font-size: 1px;
+            line-height: 0;
+            mso-margin-top-alt: 1px;
+            mso-line-height-rule: exactly;
+        }
+        * {
+            mso-line-height-rule: exactly;
+        }
+    </style>
+    <![endif]-->
+
+    {# 7 #}
+    <!--[if mso]>
+    <style type="text/css">
+        body,
+        table,
+        td {
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+    </style>
+    <![endif]-->
+
+    {# 8 #}
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+</head>
+<body>
+    {{ body_content | raw }}
+</body>
+</html>
+
+
+
+

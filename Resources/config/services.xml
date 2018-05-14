@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Extellient\MailBundle\Provider\Mail\DoctrineMailProvider">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="Extellient\MailBundle\Provider\Template\DoctrineMailTemplateProvider">
+            <argument type="service" id="Extellient\MailBundle\Repository\MailTemplateRepository"/>
+        </service>
+        <service id="Extellient\MailBundle\Template\MailTemplate">
+            <!--<argument type="service" id="doctrine.orm.entity_manager"/>-->
+            <argument type="service" id="Extellient\MailBundle\Provider\Template\MailTemplateInterface"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="logger"/>
+        </service>
+        <service id="Extellient\MailBundle\Repository\MailTemplateRepository">
+            <argument type="service" id="Symfony\Bridge\Doctrine\RegistryInterface"/>
+            <tag name="doctrine.repository_service"/>
+        </service>
+        <service id="Extellient\MailBundle\Repository\MailRepository">
+            <argument type="service" id="Symfony\Bridge\Doctrine\RegistryInterface"/>
+            <tag name="doctrine.repository_service"/>
+        </service>
+        <service id="Extellient\MailBundle\Services\MailBuilder"/>
+        <service id="Extellient\MailBundle\Services\Mailer">
+            <argument type="service" id="Extellient\MailBundle\Provider\Mail\MailProviderInterface"/>
+            <argument type="service" id="Extellient\MailBundle\Services\MailBuilder"/>
+        </service>
+        <service id="Extellient\MailBundle\Sender\SwiftMailSender">
+            <argument type="service" id="swiftmailer.mailer"/>
+            <argument type="service" id="Extellient\MailBundle\Provider\Mail\MailProviderInterface"/>
+            <argument type="service" id="logger"/>
+        </service>
+        <service id="Extellient\MailBundle\Command\MailSenderCommand">
+            <tag name="console.command" command="extellient:mail:send"/>
+            <argument type="service" id="Extellient\MailBundle\Sender\Sender"/>
+        </service>
+        <service id="Extellient\MailBundle\Services\MailTemplating">
+            <argument type="service" id="Extellient\MailBundle\Template\MailTemplate"/>
+            <argument type="service" id="Extellient\MailBundle\Services\Mailer"/>
+        </service>
+        <service id="Extellient\MailBundle\Sender\Sender">
+            <argument type="service" id="Extellient\MailBundle\Sender\MailSenderInterface"/>
+            <argument type="service" id="Extellient\MailBundle\Provider\Mail\MailProviderInterface"/>
+            <argument type="service" id="logger"/>
+        </service>
+    </services>
+</container>

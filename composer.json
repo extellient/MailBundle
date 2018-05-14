@@ -1,0 +1,52 @@
+{
+    "name": "extellient/mail-bundle",
+    "description": "Mail manager",
+    "type": "symfony-bundle",
+    "require": {
+        "php": ">=7.0",
+        "psr/log": "1.0.*",
+        "doctrine/orm": "^2.4.8",
+        "doctrine/doctrine-bundle": "~1.4",
+        "symfony/swiftmailer-bundle": "~2.3,>=2.3.10",
+        "symfony/framework-bundle": "^3.4||^4.0"
+    },
+    "suggest": {
+        "twig/twig": "^1.0||^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6|~7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Gay",
+            "email": "kgay@extellient.com"
+        },
+        {
+            "name": "Fabien Papet",
+            "email": "fpapet@extellient.com"
+        },
+        {
+            "name": "Thomas Chapuis",
+            "email": "tchapuis@extellient.com"
+        },
+        {
+            "name": "Yohan Thomas",
+            "email": "ythomas@extellient.com"
+        },
+        {
+            "name": "Nicolas Lemouton",
+            "email": "nlemouton@extellient.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Extellient\\MailBundle\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Extellient\\MailBundle\\Tests\\": "Tests/"
+        }
+    }
+}
