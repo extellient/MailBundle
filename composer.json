@@ -7,7 +7,7 @@
         "psr/log": "1.0.*",
         "doctrine/orm": "^2.4.8",
         "doctrine/doctrine-bundle": "~1.4",
-        "symfony/swiftmailer-bundle": "~2.3,>=2.3.10",
+        "symfony/swiftmailer-bundle": "~2.3|^3.0",
         "symfony/framework-bundle": "^3.4||^4.0"
     },
     "suggest": {
