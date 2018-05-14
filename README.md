@@ -1,5 +1,5 @@
 # MailBundle
-[![Build Status](https://travis-ci.org/GayKevin/test-bundle.svg?branch=master)](https://travis-ci.org/GayKevin/test-bundle)
+[![Build Status](https://travis-ci.org/extellient/MailBundle.svg?branch=master)](https://travis-ci.org/extellient/mail-bundle)
 [![codecov](https://codecov.io/gh/GayKevin/test-bundle/branch/master/graph/badge.svg)](https://codecov.io/gh/GayKevin/test-bundle)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dd8a573f5ed2487a9773215803f1d991)](https://www.codacy.com/app/GayKevin/test-bundle?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GayKevin/test-bundle&amp;utm_campaign=Badge_Grade)
 
