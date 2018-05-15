@@ -3,6 +3,19 @@
 [![codecov](https://codecov.io/gh/extellient/MailBundle/branch/master/graph/badge.svg)](https://codecov.io/gh/extellient/MailBundle)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cb88ab4f71de40af8994e5d98ac61f44)](https://www.codacy.com/app/xtladmin/MailBundle?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=extellient/MailBundle&amp;utm_campaign=Badge_Grade)
 
+This is MailBundle is Symfony 3.4+ Bundle, for building your own html mail powered with [Twig](https://github.com/twigphp/Twig) and customizing it. You can easily save your mail to your database before sending it besides your database provider, finally send your mail with your own provider, the default is [SwiftMailer](https://github.com/swiftmailer/swiftmailer)
+
+Features
+------------
+
+- Save your mail inside your database before sending it
+- Build your own mail template with twig
+- Save your mail template inside your database
+- Easily integrate with your database provider
+- Easily integrate with your mailing provider
+- Send all your mail at once with the symfony command
+
+
 Installation
 ------------
 
