@@ -49,9 +49,9 @@ class Sender
     {
         try {
             $mails = $this->mailEntityProvider->findAllMail();
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             //It should be never reach except if doctrine fails to get mails from the database
-            $this->logger->critical('Impossible to get mails from database', ['message' => $e->getMessage()]);
+            $this->logger->critical('Impossible to get mails from database', ['message' => $exception->getMessage()]);
 
             return;
         }
@@ -75,8 +75,8 @@ class Sender
             $this->mailSender->send($mail);
             $mail->updateSentDate();
             $this->logger->info('The mail has been sent', $this->getLogData($mail));
-        } catch (MailSenderException $e) {
-            $this->logger->error($e->getMessage(), [
+        } catch (MailSenderException $exception) {
+            $this->logger->error($exception->getMessage(), [
                 $this->getLogData($mail),
             ]);
             $mail->setSentError(true);

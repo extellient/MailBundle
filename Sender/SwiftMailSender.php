@@ -59,8 +59,8 @@ class SwiftMailSender implements MailSenderInterface
         $senderAlias = !empty($mail->getSenderAlias()) ? $mail->getSenderAlias() : null;
         $message->setFrom($mail->getSenderEmail(), $senderAlias);
 
-        foreach ($mail->getAttachement() as $attchement) {
-            $message->attach(Swift_Attachment::fromPath($attchement));
+        foreach ($mail->getAttachements() as $attachement) {
+            $message->attach(Swift_Attachment::fromPath($attachement));
         }
 
         return $message;

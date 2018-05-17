@@ -61,7 +61,7 @@ class MailBuilder
             $mail->setReplyToEmail($this->mailReplyTo);
         }
 
-        $mail->setAttachement($attachements);
+        $mail->setAttachements($attachements);
 
         return $mail;
     }
