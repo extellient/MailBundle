@@ -14,16 +14,16 @@ class MailerSenderEmptyException extends MailSenderException
      * Mail Identifier
      * @var MailInterface
      */
-    protected $id;
+    protected $mail;
 
     /**
      * MailerSenderEmptyException constructor.
-     * @param null $id
+     * @param MailInterface|null $mail
      * @param string $message
      */
-    public function __construct($id = null, $message = 'The Mailer has an empty sender_email')
+    public function __construct(MailInterface $mail = null, $message = 'The Mailer has an empty sender_email')
     {
-        $this->id = $id;
+        $this->mail = $mail;
         parent::__construct($message);
     }
 }

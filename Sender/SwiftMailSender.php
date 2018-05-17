@@ -53,7 +53,7 @@ class SwiftMailSender implements MailSenderInterface
 
 
         if (empty($mail->getSenderEmail())) {
-            throw new MailerSenderEmptyException($mail->getId());
+            throw new MailerSenderEmptyException($mail);
         }
 
         $senderAlias = !empty($mail->getSenderAlias()) ? $mail->getSenderAlias() : null;

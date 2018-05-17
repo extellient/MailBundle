@@ -48,7 +48,7 @@ class MailBuilder
         $mail = new Mail($subject, $body, $recipients);
 
         if (empty($this->mailAddressFrom)) {
-            throw new MailerSenderEmptyException();
+            throw new MailerSenderEmptyException($mail);
         }
 
         $mail->setSenderEmail($this->mailAddressFrom);
