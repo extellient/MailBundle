@@ -34,16 +34,16 @@ class Mailer
     /**
      * Create an entity Mail with the basic requierement for a mail.
      *
-     * @param $mailSubject
-     * @param $mailBody
+     * @param $subject
+     * @param $body
      * @param $recipients
      * @param array $attachements
      *
      * @return Mail
      */
-    public function createEmail($mailSubject, $mailBody, $recipients, $attachements = [])
+    public function createEmail($subject, $body, $recipients, $attachements = [])
     {
-        return $this->mailBuilder->createEmail($mailSubject, $mailBody, $recipients, $attachements);
+        return $this->mailBuilder->createEmail($subject, $body, $recipients, $attachements);
     }
 
     /**

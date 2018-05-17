@@ -28,14 +28,14 @@ class MailBuilder
      * Create an entity Mail with the basic requierement for a mail.
      * Which will return the Mail entity
      *
-     * @param $mailSubject
-     * @param $mailBody
+     * @param $subject
+     * @param $body
      * @param $recipients
      * @param array $attachements
      *
      * @return Mail
      */
-    public function createEmail($mailSubject, $mailBody, $recipients, $attachements = [])
+    public function createEmail($subject, $body, $recipients, $attachements = [])
     {
         if (!is_array($recipients)) {
             $recipients = [$recipients];
@@ -45,7 +45,7 @@ class MailBuilder
             $attachements = [$attachements];
         }
 
-        $mail = new Mail($mailSubject, $mailBody, $recipients);
+        $mail = new Mail($subject, $body, $recipients);
 
         if (empty($this->mailAddressFrom)) {
             throw new MailerSenderEmptyException();
