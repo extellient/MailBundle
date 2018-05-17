@@ -83,9 +83,9 @@ interface MailInterface
     public function getSentError();
 
     /**
-     * @param string $sentError
+     * @param bool $sentError
      */
-    public function setSentError($sentError = null);
+    public function setSentError(bool $sentError = false);
 
     /**
      * @return \DateTime

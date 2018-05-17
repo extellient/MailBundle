@@ -3,6 +3,7 @@
 namespace Extellient\MailBundle\Tests\Sender;
 
 use Extellient\MailBundle\Entity\Mail;
+use Extellient\MailBundle\Exception\MailerSenderEmptyException;
 use Extellient\MailBundle\Exception\MailSenderException;
 use Extellient\MailBundle\Provider\Mail\MailProviderInterface;
 use Extellient\MailBundle\Sender\SwiftMailSender;
@@ -63,7 +64,7 @@ class SwiftMailSenderTest extends TestCase
     public function testSendWithoutSenderEmail()
     {
         $mail = new Mail('subject', 'body', ['recipient@test.com']);
-        $this->expectException(\Swift_RfcComplianceException::class);
+        $this->expectException(MailerSenderEmptyException::class);
         $this->swiftMailerSender->send($mail);
     }
 

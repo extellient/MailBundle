@@ -3,6 +3,7 @@
 namespace Extellient\MailBundle\Sender;
 
 use Extellient\MailBundle\Entity\MailInterface;
+use Extellient\MailBundle\Exception\MailerSenderEmptyException;
 use Extellient\MailBundle\Exception\MailSenderException;
 use Extellient\MailBundle\Provider\Mail\MailProviderInterface;
 use Swift_Attachment;
@@ -39,16 +40,24 @@ class SwiftMailSender implements MailSenderInterface
      * @param MailInterface $mail
      *
      * @return Swift_Message
+     *
+     * @throws MailerSenderEmptyException
      */
     public function initSwiftMessage(MailInterface $mail)
     {
         $message = (new Swift_Message($mail->getSubject()))
-            ->setFrom([$mail->getSenderEmail() => $mail->getSenderAlias()])
             ->setTo($mail->getRecipient())
             ->setBody($mail->getBody(), 'text/html')
             ->setCc($mail->getRecipientCopy())
-            ->setBcc($mail->getRecipientHiddenCopy())
-        ;
+            ->setBcc($mail->getRecipientHiddenCopy());
+
+
+        if (empty($mail->getSenderEmail())) {
+            throw new MailerSenderEmptyException($mail->getId());
+        }
+
+        $senderAlias = !empty($mail->getSenderAlias()) ? $mail->getSenderAlias() : null;
+        $message->setFrom($mail->getSenderEmail(), $senderAlias);
 
         foreach ($mail->getAttachement() as $attchement) {
             $message->attach(Swift_Attachment::fromPath($attchement));
@@ -63,6 +72,7 @@ class SwiftMailSender implements MailSenderInterface
      * @return int
      *
      * @throws MailSenderException
+     * @throws MailerSenderEmptyException
      */
     public function send(MailInterface $mail)
     {

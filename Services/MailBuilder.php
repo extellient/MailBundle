@@ -4,6 +4,7 @@
 namespace Extellient\MailBundle\Services;
 
 use Extellient\MailBundle\Entity\Mail;
+use Extellient\MailBundle\Exception\MailerSenderEmptyException;
 
 /**
  * Class MailBuilder
@@ -45,9 +46,21 @@ class MailBuilder
         }
 
         $mail = new Mail($mailSubject, $mailBody, $recipients);
-        $mail->setSenderAlias($this->mailAliasFrom);
+
+        if (empty($this->mailAddressFrom)) {
+            throw new MailerSenderEmptyException();
+        }
+
         $mail->setSenderEmail($this->mailAddressFrom);
-        $mail->setReplyToEmail($this->mailReplyTo);
+
+        if (!empty($this->mailAliasFrom)) {
+            $mail->setSenderAlias($this->mailAliasFrom);
+        }
+
+        if (!empty($this->mailReplyTo)) {
+            $mail->setReplyToEmail($this->mailReplyTo);
+        }
+
         $mail->setAttachement($attachements);
 
         return $mail;
@@ -56,7 +69,7 @@ class MailBuilder
     /**
      * @param string $mailAddressFrom
      */
-    public function setMailAddressFrom(string $mailAddressFrom)
+    public function setMailAddressFrom(string $mailAddressFrom = '')
     {
         $this->mailAddressFrom = $mailAddressFrom;
     }
@@ -64,7 +77,7 @@ class MailBuilder
     /**
      * @param string $mailAliasFrom
      */
-    public function setMailAliasFrom(string $mailAliasFrom)
+    public function setMailAliasFrom(string $mailAliasFrom = '')
     {
         $this->mailAliasFrom = $mailAliasFrom;
     }
@@ -72,7 +85,7 @@ class MailBuilder
     /**
      * @param string $mailReplyTo
      */
-    public function setMailReplyTo(string $mailReplyTo)
+    public function setMailReplyTo(string $mailReplyTo = '')
     {
         $this->mailReplyTo = $mailReplyTo;
     }

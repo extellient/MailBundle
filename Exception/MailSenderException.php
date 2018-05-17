@@ -9,9 +9,10 @@ class MailSenderException extends \Exception
 {
     /**
      * MailTemplateNotFoundException constructor.
+     * @param string $message
      */
-    public function __construct()
+    public function __construct($message = 'Mail not send')
     {
-        parent::__construct('Mail not send');
+        parent::__construct($message);
     }
 }
