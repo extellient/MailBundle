@@ -69,10 +69,10 @@ class Mail implements MailInterface
      */
     protected $replyToEmail = '';
     /**
-     * @var string
-     * @ORM\Column(name="sent_error", type="boolean", nullable=true)
+     * @var bool
+     * @ORM\Column(name="sent_error", type="boolean")
      */
-    protected $sentError = null;
+    protected $sentError = false;
     /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
@@ -207,7 +207,7 @@ class Mail implements MailInterface
     }
 
     /**
-     * @return string
+     * @return bool
      */
     public function getSentError()
     {
@@ -215,9 +215,9 @@ class Mail implements MailInterface
     }
 
     /**
-     * @param string $sentError
+     * @param bool $sentError
      */
-    public function setSentError($sentError = null)
+    public function setSentError(bool $sentError = false)
     {
         $this->sentError = $sentError;
     }

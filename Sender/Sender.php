@@ -2,7 +2,6 @@
 
 namespace Extellient\MailBundle\Sender;
 
-use Extellient\MailBundle\Entity\Mail;
 use Extellient\MailBundle\Entity\MailInterface;
 use Extellient\MailBundle\Exception\MailSenderException;
 use Extellient\MailBundle\Provider\Mail\MailProviderInterface;
@@ -75,12 +74,12 @@ class Sender
         try {
             $this->mailSender->send($mail);
             $mail->updateSentDate();
-            $this->logger->info('The mail has been sent', $this->getMailLog($mail));
+            $this->logger->info('The mail has been sent', $this->getLogData($mail));
         } catch (MailSenderException $e) {
-            $this->logger->error('The mail was not sent', [
-                $this->getMailLog($mail),
+            $this->logger->error($e->getMessage(), [
+                $this->getLogData($mail),
             ]);
-            $mail->setSentError($e->getMessage());
+            $mail->setSentError(true);
         }
     }
 
@@ -89,7 +88,7 @@ class Sender
      *
      * @return array
      */
-    public function getMailLog(MailInterface $mail)
+    public function getLogData(MailInterface $mail)
     {
         return [
             'recipients' => $mail->getRecipient(),

@@ -81,13 +81,13 @@ class SenderTest extends TestCase
         $this->loggerInterface->expects($this->once())->method('error');
 
         $this->sender->sendOne($mail);
-        $this->assertEquals('Mail not send', $mail->getSentError());
+        $this->assertEquals(true, $mail->getSentError());
     }
 
     public function testGetMailLog()
     {
         $mail = new Mail('subject', 'body', ['recipient@test.com']);
-        $log = $this->sender->getMailLog($mail);
+        $log = $this->sender->getLogData($mail);
         $this->assertInternalType('array', $log);
         $this->assertCount(5, $log);
         $this->assertArrayHasKey('recipients', $log);
