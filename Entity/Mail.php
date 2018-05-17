@@ -29,30 +29,30 @@ class Mail implements MailInterface
      */
     protected $body = '';
     /**
-     * @var array
-     * @ORM\Column(name="recipient", type="array")
+     * @var string
+     * @ORM\Column(name="recipient", type="text")
      */
     protected $recipient = '';
     /**
-     * @var array
-     * @ORM\Column(name="recipient_copy", type="array")
+     * @var string
+     * @ORM\Column(name="recipient_copy", type="text", nullable=true)
      */
-    protected $recipientCopy = [];
+    protected $recipientCopy = null;
     /**
-     * @var array
-     * @ORM\Column(name="recipient_hidden_copy", type="array")
+     * @var string
+     * @ORM\Column(name="recipient_hidden_copy", type="text", nullable=true)
      */
-    protected $recipientHiddenCopy = [];
+    protected $recipientHiddenCopy = null;
     /**
      * @var \DateTime
      * @ORM\Column(name="sent_date", type="datetime", nullable=true)
      */
     protected $sentDate = null;
     /**
-     * @var array
-     * @ORM\Column(name="attachement", type="array")
+     * @var string
+     * @ORM\Column(name="attachement", type="text", nullable=true)
      */
-    protected $attachement = [];
+    protected $attachement = null;
     /**
      * @var string
      * @ORM\Column(name="sender_alias", type="string", length=255, nullable=true)
@@ -90,7 +90,7 @@ class Mail implements MailInterface
     {
         $this->subject = $subject;
         $this->body = $body;
-        $this->recipient = $recipients;
+        $this->recipient = implode('|', $recipients);
         $this->createdAt = new \DateTime();
     }
 
@@ -243,23 +243,26 @@ class Mail implements MailInterface
      */
     public function getRecipient()
     {
-        return $this->recipient;
+        return empty($this->recipient) ? [] : explode('|', $this->recipient);
     }
 
     /**
      * @param array $recipient
      */
-    public function setRecipient(array $recipient)
+    public function setRecipient(array $recipient = null)
     {
-        $this->recipient = $recipient;
+        $this->recipient = empty($recipient) ? null : implode('|', $recipient);
     }
 
     /**
      * @param string $recipient
      */
-    public function addRecipient($recipient)
+    public function addRecipient(string $recipient)
     {
-        $this->recipient[] = $recipient;
+        $recipientTmp =  empty($this->recipient) ? [] : explode('|', $this->recipient);
+        $recipientTmp[] = $recipient;
+
+        $this->recipient = implode('|', $recipientTmp);
     }
 
     /**
@@ -267,23 +270,26 @@ class Mail implements MailInterface
      */
     public function getRecipientCopy()
     {
-        return $this->recipientCopy;
+        return empty($this->recipientCopy) ? [] :explode('|', $this->recipientCopy);
     }
 
     /**
      * @param array $recipientCopy
      */
-    public function setRecipientCopy(array $recipientCopy)
+    public function setRecipientCopy(array $recipientCopy = null)
     {
-        $this->recipientCopy = $recipientCopy;
+        $this->recipientCopy = empty($recipientCopy) ? null : implode('|', $recipientCopy);
     }
 
     /**
      * @param string $recipientCopy
      */
-    public function addRecipientCopy($recipientCopy)
+    public function addRecipientCopy(string $recipientCopy)
     {
-        $this->recipientCopy[] = $recipientCopy;
+        $recipientCopyTmp = empty($this->recipientCopy) ? [] : explode('|', $this->recipientCopy);
+        $recipientCopyTmp[] = $recipientCopy;
+
+        $this->recipientCopy = implode('|', $recipientCopyTmp);
     }
 
     /**
@@ -291,15 +297,15 @@ class Mail implements MailInterface
      */
     public function getRecipientHiddenCopy()
     {
-        return $this->recipientHiddenCopy;
+        return empty($this->recipientHiddenCopy) ? [] : explode('|', $this->recipientHiddenCopy);
     }
 
     /**
      * @param array $recipientHiddenCopy
      */
-    public function setRecipientHiddenCopy(array $recipientHiddenCopy)
+    public function setRecipientHiddenCopy(array $recipientHiddenCopy = null)
     {
-        $this->recipientHiddenCopy = $recipientHiddenCopy;
+        $this->recipientHiddenCopy = empty($recipientHiddenCopy) ? null : implode('|', $recipientHiddenCopy);
     }
 
     /**
@@ -307,7 +313,10 @@ class Mail implements MailInterface
      */
     public function addRecipientHiddenCopy($recipientHiddenCopy)
     {
-        $this->recipientHiddenCopy[] = $recipientHiddenCopy;
+        $recipientHiddenCopyTmp = empty($this->recipientHiddenCopy) ? [] : explode('|', $this->recipientHiddenCopy);
+        $recipientHiddenCopyTmp[] = $recipientHiddenCopy;
+
+        $this->recipientHiddenCopy = implode('|', $recipientHiddenCopyTmp);
     }
 
     /**
@@ -315,23 +324,26 @@ class Mail implements MailInterface
      */
     public function getAttachement()
     {
-        return $this->attachement;
+        return empty($this->attachement) ? [] : explode('|', $this->attachement);
     }
 
     /**
      * @param array $attachement
      */
-    public function setAttachement(array $attachement)
+    public function setAttachement(array $attachement = null)
     {
-        $this->attachement = $attachement;
+        $this->attachement = empty($attachement) ? null : implode('|', $attachement);
     }
 
     /**
      * @param string $attachement
      */
-    public function addAttachement($attachement)
+    public function addAttachement(string $attachement)
     {
-        $this->attachement[] = $attachement;
+        $attachementTmp = empty($this->attachement) ? [] : explode('|', $this->attachement);
+        $attachementTmp[] = $attachement;
+
+        $this->attachement[] = implode('|', $attachementTmp);
     }
 
     /**

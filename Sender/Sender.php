@@ -50,7 +50,7 @@ class Sender
         try {
             $mails = $this->mailEntityProvider->findAllMail();
         } catch (\Exception $e) {
-            //It should never happens except if the Doctrine Array is not correct (DC2Type:array)
+            //It should be never reach except if doctrine fails to get mails from the database
             $this->logger->critical('Impossible to get mails from database', ['message' => $e->getMessage()]);
 
             return;
