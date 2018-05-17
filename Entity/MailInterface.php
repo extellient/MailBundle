@@ -120,7 +120,7 @@ interface MailInterface
     /**
      * @param string $recipientCopy
      */
-    public function addRecipientCopy($recipientCopy);
+    public function addRecipientCopy(string $recipientCopy);
 
     /**
      * @return array
