@@ -10,10 +10,14 @@ class MailTemplateNotGeneratedException extends \Exception
     /**
      * MailTemplateNotGeneratedException constructor.
      *
-     * @param \Exception $e
+     * @param \Exception $exception
      */
-    public function __construct(\Exception $e)
+    public function __construct(\Exception $exception)
     {
-        parent::__construct(sprintf('Mail Template has not been generated(%s)', $e->getMessage()), $e->getCode(), $e);
+        parent::__construct(
+            sprintf('Mail Template has not been generated(%s)', $exception->getMessage()),
+            $exception->getCode(),
+            $exception
+        );
     }
 }

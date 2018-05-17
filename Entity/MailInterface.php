@@ -78,9 +78,9 @@ interface MailInterface
     public function setReplyToEmail($replyToEmail);
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getSentError();
+    public function isSentError();
 
     /**
      * @param bool $sentError
@@ -140,12 +140,12 @@ interface MailInterface
     /**
      * @return array
      */
-    public function getAttachement();
+    public function getAttachements();
 
     /**
      * @param array $attachement
      */
-    public function setAttachement(array $attachement);
+    public function setAttachements(array $attachement);
 
     public function updateSentDate();
 }

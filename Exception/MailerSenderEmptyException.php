@@ -14,7 +14,7 @@ class MailerSenderEmptyException extends MailSenderException
      * Mail Identifier
      * @var MailInterface
      */
-    private $id;
+    protected $id;
 
     /**
      * MailerSenderEmptyException constructor.

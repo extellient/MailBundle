@@ -38,7 +38,7 @@ class SwiftMailSenderTest extends TestCase
         $mail = new Mail('subject', 'body', ['recipient@test.com']);
         $mail->setSenderEmail('sender@test.com');
         $mail->setSenderAlias('senderAlias');
-        $mail->setAttachement(['test.pdf']);
+        $mail->setAttachements(['test.pdf']);
 
         $message = $this->swiftMailerSender->initSwiftMessage($mail);
 

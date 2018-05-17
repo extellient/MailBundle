@@ -14,16 +14,16 @@ class DoctrineMailProvider implements MailProviderInterface
     /**
      * @var EntityManagerInterface
      */
-    private $em;
+    private $entityManager;
 
     /**
      * MailProviderDoctrine constructor.
      *
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -39,11 +39,11 @@ class DoctrineMailProvider implements MailProviderInterface
 
         //Persist all mails
         foreach ($mails as $mail) {
-            $this->em->persist($mail);
+            $this->entityManager->persist($mail);
         }
 
         //Flush all mails
-        $this->em->getUnitOfWork()->commit($mails);
+        $this->entityManager->getUnitOfWork()->commit($mails);
     }
 
     /**
@@ -51,7 +51,7 @@ class DoctrineMailProvider implements MailProviderInterface
      */
     public function findAllMail()
     {
-        return $this->em
+        return $this->entityManager
             ->getRepository(Mail::class)
             ->findBySentDate();
     }
