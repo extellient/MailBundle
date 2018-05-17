@@ -7,14 +7,14 @@ use Extellient\MailBundle\Entity\MailInterface;
 interface MailerInterface
 {
     /**
-     * @param $mailSubject
-     * @param $mailBody
+     * @param $subject
+     * @param $body
      * @param $recipients
      * @param $attachements
      *
      * @return MailInterface
      */
-    public function createEmail($mailSubject, $mailBody, $recipients, $attachements);
+    public function createEmail($subject, $body, $recipients, $attachements);
 
     /**
      * @return MailInterface
