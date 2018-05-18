@@ -4,7 +4,6 @@
 namespace Extellient\MailBundle\Services;
 
 use Extellient\MailBundle\Entity\Mail;
-use Extellient\MailBundle\Exception\MailerSenderEmptyException;
 
 /**
  * Class MailBuilder
@@ -46,10 +45,6 @@ class MailBuilder
         }
 
         $mail = new Mail($subject, $body, $recipients);
-
-        if (empty($this->mailAddressFrom)) {
-            throw new MailerSenderEmptyException($mail);
-        }
 
         $mail->setSenderEmail($this->mailAddressFrom);
 
