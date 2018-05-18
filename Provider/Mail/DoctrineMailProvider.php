@@ -5,6 +5,7 @@ namespace Extellient\MailBundle\Provider\Mail;
 use Doctrine\ORM\EntityManagerInterface;
 use Extellient\MailBundle\Entity\Mail;
 use Extellient\MailBundle\Entity\MailInterface;
+use Extellient\MailBundle\Exception\MailerSenderEmptyException;
 
 /**
  * Class MailProviderDoctrine.
@@ -38,7 +39,12 @@ class DoctrineMailProvider implements MailProviderInterface
         }
 
         //Persist all mails
+        /** @var MailInterface $mail */
         foreach ($mails as $mail) {
+            if (empty($mail->getSenderEmail())) {
+                throw new MailerSenderEmptyException($mail);
+            }
+
             $this->entityManager->persist($mail);
         }
 
