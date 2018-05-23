@@ -32,7 +32,7 @@ class MailTemplating implements MailTemplatingInterface
 
     /**
      * Create an entity Mail with the basic requierement for a mail from a MailTemplate name
-     * Which will return the Mail entity
+     * Which will return the Mail entity.
      *
      * @param string       $templateCode
      * @param array|string $recipients

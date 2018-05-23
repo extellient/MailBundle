@@ -51,7 +51,6 @@ class SwiftMailSender implements MailSenderInterface
             ->setCc($mail->getRecipientCopy())
             ->setBcc($mail->getRecipientHiddenCopy());
 
-
         if (empty($mail->getSenderEmail())) {
             throw new MailerSenderEmptyException($mail);
         }

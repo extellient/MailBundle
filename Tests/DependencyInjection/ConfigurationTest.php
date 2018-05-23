@@ -36,6 +36,7 @@ class ConfigurationTest extends TestCase
     {
         return [
             [
+                //Config Test Mails Configuration
                 [
                     'extellient_mail' => [
                         'mail_address_from' => 'test@test.com',
@@ -43,6 +44,7 @@ class ConfigurationTest extends TestCase
                         'mail_reply_to' => 'test@test.com',
                     ],
                 ],
+                //Excepted Config (processConfiguration)
                 [
                     'mail_service_provider' => DoctrineMailProvider::class,
                     'mail_template_service_provider' => DoctrineMailTemplateProvider::class,
@@ -50,8 +52,47 @@ class ConfigurationTest extends TestCase
                     'mail_address_from' => 'test@test.com',
                     'mail_alias_from' => 'test@test.com',
                     'mail_reply_to' => 'test@test.com',
+                    'base_template' => '@Mail/base.html.twig',
                 ],
             ],
+            [
+                //Config Test Base Template Configuration
+                [
+                    'extellient_mail' => [
+                        'base_template' => '@Mail/base.html.twig',
+                    ],
+                ],
+                //Excepted Config (processConfiguration)
+                [
+                    'mail_service_provider' => DoctrineMailProvider::class,
+                    'mail_template_service_provider' => DoctrineMailTemplateProvider::class,
+                    'mail_sender_service_provider' => SwiftMailSender::class,
+                    'mail_address_from' => '',
+                    'mail_alias_from' => '',
+                    'mail_reply_to' => '',
+                    'base_template' => '@Mail/base.html.twig',
+                ]
+            ],
+            [
+                //Config test Mail Providers
+                [
+                    'extellient_mail' => [
+                        'mail_service_provider' => 'App\\Provider\\MailServiceClass',
+                        'mail_template_service_provider' => 'App\\Provider\\TemplateServiceClass',
+                        'mail_sender_service_provider' => 'App\\Provider\\SenderServiceClass',
+                    ],
+                ],
+                //Excepted Config (processConfiguration)
+                [
+                    'mail_service_provider' => 'App\\Provider\\MailServiceClass',
+                    'mail_template_service_provider' => 'App\\Provider\\TemplateServiceClass',
+                    'mail_sender_service_provider' => 'App\\Provider\\SenderServiceClass',
+                    'mail_address_from' => '',
+                    'mail_alias_from' => '',
+                    'mail_reply_to' => '',
+                    'base_template' => '@Mail/base.html.twig',
+                ]
+            ]
         ];
     }
 }

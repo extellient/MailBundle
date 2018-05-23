@@ -259,7 +259,7 @@ class Mail implements MailInterface
      */
     public function addRecipient(string $recipient)
     {
-        $recipients =  empty($this->recipient) ? [] : explode('|', $this->recipient);
+        $recipients = empty($this->recipient) ? [] : explode('|', $this->recipient);
         $recipients[] = $recipient;
 
         $this->recipient = implode('|', $recipients);
@@ -270,7 +270,7 @@ class Mail implements MailInterface
      */
     public function getRecipientCopy()
     {
-        return empty($this->recipientCopy) ? [] :explode('|', $this->recipientCopy);
+        return empty($this->recipientCopy) ? [] : explode('|', $this->recipientCopy);
     }
 
     /**

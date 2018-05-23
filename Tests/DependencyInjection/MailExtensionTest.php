@@ -30,11 +30,7 @@ class MailExtensionTest extends TestCase
     {
         $container = $this->createContainer();
         $container->registerExtension(new MailExtension());
-        $container->loadFromExtension('extellient_mail', [
-            'mail_address_from' => 'test@test.com',
-            'mail_alias_from' => 'test@test.com',
-            'mail_reply_to' => 'test@test.com',
-        ]);
+        $container->loadFromExtension('extellient_mail');
         $this->compileContainer($container);
 
         $this->assertEquals(

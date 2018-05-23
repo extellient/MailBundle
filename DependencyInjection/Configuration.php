@@ -40,6 +40,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('mail_reply_to')
                     ->defaultValue('')
                 ->end()
+                ->scalarNode('base_template')
+                    ->defaultValue('@Mail/base.html.twig')
             ->end()
         ;
 
