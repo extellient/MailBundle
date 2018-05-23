@@ -24,7 +24,7 @@ class Mailer
      * MailService constructor.
      *
      * @param MailProviderInterface $mailProvider
-     * @param MailBuilder $mailBuilder
+     * @param MailBuilder           $mailBuilder
      */
     public function __construct(MailProviderInterface $mailProvider, MailBuilder $mailBuilder)
     {

@@ -24,6 +24,10 @@ class MailTemplateRenderer implements MailTemplateRendererInterface
      * @var LoggerInterface
      */
     private $logger;
+    /**
+     * @var string|null
+     */
+    private $baseTemplate;
 
     /**
      * MailTemplateRender constructor.
@@ -31,12 +35,18 @@ class MailTemplateRenderer implements MailTemplateRendererInterface
      * @param Twig_Environment      $twig
      * @param MailTemplateInterface $mailTemplate
      * @param LoggerInterface       $logger
+     * @param string                $baseTemplate
      */
-    public function __construct(Twig_Environment $twig, MailTemplateInterface $mailTemplate, LoggerInterface $logger)
-    {
+    public function __construct(
+        Twig_Environment $twig,
+        MailTemplateInterface $mailTemplate,
+        LoggerInterface $logger,
+        string $baseTemplate = null
+    ) {
         $this->twig = $twig;
         $this->mailTemplate = $mailTemplate;
         $this->logger = $logger;
+        $this->baseTemplate = $baseTemplate;
     }
 
     /**
@@ -44,19 +54,20 @@ class MailTemplateRenderer implements MailTemplateRendererInterface
      *
      * @return string
      *
+     * @throws MailTemplateNotGeneratedException
      * @throws \Throwable
      */
-    public function getBody(array $variables = [])
+    public function getBody(array $variables = []): string
     {
         try {
-            // @codeCoverageIgnoreStart
-            // How to test Twig_Template abstract ? TODO
-            $baseTemplate = $this->twig->load('@Mail/base.html.twig');
-            $bodyTemplate = $this->twig->createTemplate($this->mailTemplate->getMailBody());
-            $bodyContent = $bodyTemplate->render($variables);
+            if (null !== $this->baseTemplate) {
+                $baseTemplate = $this->twig->load($this->baseTemplate);
+                $bodyContent = $this->renderTemplate($variables);
 
-            return $baseTemplate->render(['body_content' => $bodyContent]);
-            // @codeCoverageIgnoreEnd
+                return $baseTemplate->render(['body_content' => $bodyContent, 'vars' => $variables]);
+            }
+
+            return $this->renderTemplate($variables);
         } catch (\Twig_Error $e) {
             $this->logger->error('Impossible to generate Mail Body template', $variables);
             throw new MailTemplateNotGeneratedException($e);
@@ -71,17 +82,28 @@ class MailTemplateRenderer implements MailTemplateRendererInterface
      * @throws MailTemplateNotGeneratedException
      * @throws \Throwable
      */
-    public function getSubject(array $variables = [])
+    public function getSubject(array $variables = []): string
     {
         try {
-            // @codeCoverageIgnoreStart
-            // How to test Twig_Template abstract ? TODO
             $template = $this->twig->createTemplate($this->mailTemplate->getMailSubject());
             return $template->render($variables);
-            // @codeCoverageIgnoreEnd
         } catch (\Twig_Error $e) {
             $this->logger->error('Impossible to generate Mail Subject template', $variables);
             throw new MailTemplateNotGeneratedException($e);
         }
+    }
+
+    /**
+     * @param array $variables
+     *
+     * @return string
+     *
+     * @throws \Throwable
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Syntax
+     */
+    private function renderTemplate(array $variables = [])
+    {
+        return $this->twig->createTemplate($this->mailTemplate->getMailBody())->render($variables);
     }
 }

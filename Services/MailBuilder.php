@@ -1,12 +1,11 @@
 <?php
 
-
 namespace Extellient\MailBundle\Services;
 
 use Extellient\MailBundle\Entity\Mail;
 
 /**
- * Class MailBuilder
+ * Class MailBuilder.
  */
 class MailBuilder
 {
@@ -25,7 +24,7 @@ class MailBuilder
 
     /**
      * Create an entity Mail with the basic requierement for a mail.
-     * Which will return the Mail entity
+     * Which will return the Mail entity.
      *
      * @param $subject
      * @param $body

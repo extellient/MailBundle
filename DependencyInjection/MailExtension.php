@@ -37,8 +37,13 @@ class MailExtension extends Extension
         $mailAddressFrom = $config['mail_address_from'];
         $mailAliasFrom = $config['mail_alias_from'];
         $mailReplyTo = $config['mail_reply_to'];
+        $baseTemplate = $config['base_template'];
 
-        $container->getDefinition(MailTemplate::class)->replaceArgument(0, new Reference($templateProvider));
+        $container->getDefinition(MailTemplate::class)
+            ->replaceArgument(0, new Reference($templateProvider))
+            ->setMethodCalls([
+                ['setBaseTemplate', [$baseTemplate]],
+            ]);
 
         $container->getDefinition(SwiftMailSender::class)->replaceArgument(1, new Reference($mailProvider));
 
@@ -47,7 +52,7 @@ class MailExtension extends Extension
         $container->getDefinition(MailBuilder::class)->setMethodCalls([
             ['setMailAddressFrom', [$mailAddressFrom]],
             ['setMailAliasFrom', [$mailAliasFrom]],
-            ['setMailReplyTo', [$mailReplyTo]]
+            ['setMailReplyTo', [$mailReplyTo]],
         ]);
 
         $container->getDefinition(Sender::class)

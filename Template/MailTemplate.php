@@ -24,6 +24,10 @@ class MailTemplate
      * @var LoggerInterface
      */
     private $logger;
+    /**
+     * @var string|null
+     */
+    private $baseTemplate;
 
     /**
      * Template constructor.
@@ -55,6 +59,14 @@ class MailTemplate
     {
         $mailTemplate = $this->mailProvider->findOneTemplateByCode($code);
 
-        return new MailTemplateRenderer($this->twig, $mailTemplate, $this->logger);
+        return new MailTemplateRenderer($this->twig, $mailTemplate, $this->logger, $this->baseTemplate);
+    }
+
+    /**
+     * @param string|null $baseTemplate
+     */
+    public function setBaseTemplate(string $baseTemplate = null)
+    {
+        $this->baseTemplate = $baseTemplate;
     }
 }
